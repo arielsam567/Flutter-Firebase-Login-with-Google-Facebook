@@ -97,6 +97,23 @@ class _LoginPageState extends State<LoginPage> {
                         )
                     ),
 
+                    const SizedBox(height: 50,),
+
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
+                          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),),
+                        onPressed: (){
+                          controller.loginWithTwitter();
+                        },
+                        child: const Text(
+                          'Login com Twitter',
+                          style: TextStyle(
+                              color: Colors.white
+                          ),
+                        )
+                    ),
+
                   ],
                 ),
 

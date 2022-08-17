@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -7,6 +7,8 @@ import 'package:login_firebase/config/config.dart';
 import 'package:login_firebase/pages/home/home_page.dart';
 import 'package:login_firebase/services/storage.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:twitter_login/entity/auth_result.dart';
+import 'package:twitter_login/twitter_login.dart';
 
 class LoginController extends ChangeNotifier{
 
@@ -21,6 +23,7 @@ class LoginController extends ChangeNotifier{
       UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
 
       print("\n\nfirebaseToken: ${userCredential.user!.email}");
+
 
       successToLogin(userCredential.user!.email!);
       goToHomePage();
@@ -82,32 +85,64 @@ class LoginController extends ChangeNotifier{
   Future<void> loginWithApple() async {
 
     try {
-      final AuthorizationCredentialAppleID _appleCredential =
-      await SignInWithApple.getAppleIDCredential(scopes: [
+      final  appleCredential = await SignInWithApple.getAppleIDCredential(scopes: [
         AppleIDAuthorizationScopes.email,
-        AppleIDAuthorizationScopes.fullName,
       ],
           webAuthenticationOptions: WebAuthenticationOptions(
               clientId: 'com.ariel.login.com.firebase',
-              redirectUri: Uri.parse('https://flutter-login.glitch.me/callbacks/sign_in_with_apple')));
+              redirectUri: Uri.parse(
+                'https://flutter-login.glitch.me/callbacks/sign_in_with_apple',
+              )
+          )
+      );
 
       final OAuthProvider oAuthProvider = OAuthProvider('apple.com');
 
-      final OAuthCredential _credential = oAuthProvider.credential(
-        idToken: _appleCredential.identityToken,
-        accessToken: _appleCredential.authorizationCode,
+      final OAuthCredential credential = oAuthProvider.credential(
+        idToken: appleCredential.identityToken,
+        accessToken: appleCredential.authorizationCode,
       );
 
-      FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+      FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-      final UserCredential userCredential =
-      await _firebaseAuth.signInWithCredential(_credential);
+      final UserCredential userCredential = await firebaseAuth.signInWithCredential(credential);
 
       successToLogin(userCredential.user!.email!);
       goToHomePage();
 
     } catch (e) {
       print('error $e');
+    }
+  }
+
+  Future<void> loginWithTwitter() async {
+
+    try {
+
+      final twitterLogin = TwitterLogin(
+        //Accress token 1559968401656799238-EPpvFWd2cAhWJnG2HAv85j0uQA9I3p
+        //Access Token Secret 8s3zOfLUDNCarEcAR5vAuft4D5iuG9ivGuUGk7B1XlYuG
+        apiKey: 'DS9S5DRLBAe6OsGiZSpTuIWsU',
+        apiSecretKey: 'mnlexqam9DJosoGqSG0aEgd2RiZRT2HiJrDAFUfPX4zUApIiNm',
+        redirectURI: 'arielsam://',
+      );
+      final AuthResult authResult = await twitterLogin.loginV2(forceLogin: true);
+      switch (authResult.status!) {
+        case TwitterLoginStatus.loggedIn:
+          print('success ${authResult.user!.name}');
+          successToLogin(authResult.user!.name);
+          goToHomePage();
+          break;
+        case TwitterLoginStatus.cancelledByUser:
+          print('error 1 ${authResult.errorMessage}');
+          break;
+        case TwitterLoginStatus.error:
+          print('error 2 ${authResult.errorMessage}');
+          break;
+      }
+
+    } catch (e) {
+      print('error $e 3');
     }
   }
 
