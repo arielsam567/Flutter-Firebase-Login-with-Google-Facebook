@@ -29,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
-<!--            twittwe-->
+            <!--  START TWITTER CONFIG-->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -41,6 +41,7 @@
                     android:host="arielsam"
                     android:scheme="arielsam" /> <!-- host is option -->
             </intent-filter>
+            <!--  END TWITTER CONFIG-->
 
         </activity>
         <!-- Don't delete the meta-data below.
@@ -49,7 +50,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
-        <!-- Set up to FACEBOOK  -->
+        <!-- START FACEBOOK CONFIG -->
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
@@ -68,8 +69,10 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+        <!-- END FACEBOOK CONFIG -->
 
-        <!-- Set up the Sign in with Apple activity, such that it's callable from the browser-redirect -->
+
+        <!-- START APPLEID CONFIG -->
         <activity
             android:name="com.aboutyou.dart_packages.sign_in_with_apple.SignInWithAppleCallback"
             android:exported="true"
@@ -83,5 +86,7 @@
                 <data android:path="callback" />
             </intent-filter>
         </activity>
+        <!-- END APPLEID CONFIG -->
+
     </application>
 </manifest>

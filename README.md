@@ -1,23 +1,113 @@
-# login_firebase
+# Login com Firebase
 
-A new Flutter project.
+## Libs utilizadas
+```
+  firebase_auth: ^3.6.0
+  firebase_core: ^1.0.1
+  google_sign_in: ^5.4.1
+  flutter_login_facebook: ^1.2.0  
+  sign_in_with_apple: ^4.1.0
+  twitter_login: ^4.1.0-dev
+```
 
-## Getting Started
+## Configuração para google_sign_in
 
-This project is a starting point for a Flutter application.
+### 1. Para android, obter o SHA-1 e SHA-256 para inserir no firebase
+```
+ $ cd android
+ $ ./gradlew signingReport
+```
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 2. Para IOS, inserir no info.plist,
+```plist
+<!-- Google Sign-in Section -->
+<key>CFBundleURLTypes</key>
+<array>
+	<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<!-- TODO Replace this value: -->
+			<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+			<string>com.googleusercontent.apps.861823949799-vc35cprkp249096uujjn0vvnmcvjppkn</string>
+		</array>
+	</dict>
+</array>
+<!-- End of the Google Sign-in Section -->
+```
 
 VERSAO MINIMA COM flutter_login_facebook: ^1.2.0 É IOS 12
 
-adicionar sha1 e sha256 no firebase p login com google
-cd android
-./gradlew signingReport
+## Configuração para flutter_login_facebook
 
+### 1. Para android, criar o arquivo strings.xml localizado em android/app/src/main/res/values/
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">[NAME]</string>
+    <string name="facebook_app_id">[FACEBOOK_APP_ID]</string>
+    <string name="facebook_client_token">[FACEBOOK_CLIENT_TOKEN]</string>
+    <string name="fb_login_protocol_scheme">fb[FACEBOOK_APP_ID]</string>
+</resources>
+```
+
+### 2. Adicionar ao AndroidManifest.xml
+```xml
+[...]
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <queries>
+    <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
+    </queries>
+[...]
+
+    <!-- START FACEBOOK CONFIG -->
+<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+<meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+
+<activity android:name="com.facebook.FacebookActivity"
+android:configChanges=
+    "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+android:label="@string/app_name" />
+<activity
+android:name="com.facebook.CustomTabActivity"
+android:exported="true">
+<intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data android:scheme="@string/fb_login_protocol_scheme" />
+</intent-filter>
+</activity>
+    <!-- END FACEBOOK CONFIG -->
+```
+
+### 4. Adicionar ao info.plist, inserir dentro do array de CFBundleURLTypes
+```plist
+<key>CFBundleURLTypes</key>
+	<array>
+		[...]
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb[APP_ID]</string>
+			</array>
+		</dict>
+	</array>
+```
+
+### 5. Adicionar ao info.plist
+```plist
+    [...]
+    <key>FacebookAppID</key>
+	<string>[APP_ID]</string>
+	<key>FacebookClientToken</key>
+	<string>[FACEBOOK_CLIENT_TOKEN]</string>
+	<key>FacebookDisplayName</key>
+	<string>[APP_NAME]</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+	</array>
+```
