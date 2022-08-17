@@ -1,12 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:login_firebase/config/config.dart';
 import 'package:login_firebase/pages/home/home_page.dart';
+import 'package:login_firebase/pages/login/login_with_phone/login_phone_page.dart';
 import 'package:login_firebase/services/storage.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:toast/toast.dart';
 import 'package:twitter_login/entity/auth_result.dart';
 import 'package:twitter_login/twitter_login.dart';
 
@@ -22,28 +25,29 @@ class LoginController extends ChangeNotifier{
       );
       UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
 
-      print("\n\nfirebaseToken: ${userCredential.user!.email}");
-
+      print("\email: ${userCredential.user!.email}\n");
 
       successToLogin(userCredential.user!.email!);
       goToHomePage();
     } catch (e) {
+      Toast.show(
+          'error $e',
+          duration: 3,
+          backgroundColor: Colors.red
+      );
       print('error $e');
     }
   }
 
   Future<void> loginWithFacebook() async {
-    print("1");
     try {
       final fb = FacebookLogin();
-      print("2");
       final FacebookLoginResult res = await fb.logIn(
           permissions: [
             FacebookPermission.publicProfile,
             FacebookPermission.email,
           ]
       );
-      print("3");
 
       switch (res.status) {
         case FacebookLoginStatus.success:
@@ -70,15 +74,30 @@ class LoginController extends ChangeNotifier{
         case FacebookLoginStatus.error:
         // Log in failed
           print('\n***\n***\nError while log in: ${res.error}');
+          Toast.show(
+              'error ${res.error}',
+              duration: 3,
+              backgroundColor: Colors.red
+          );
           break;
 
         default:
         // Log in failed
           print('\n***\n***\nDefault while log in: ${res.error}');
+          Toast.show(
+              'error ${res.error}',
+              duration: 3,
+              backgroundColor: Colors.red
+          );
           break;
       }
     } catch (e) {
-      print('error ${e}');
+      Toast.show(
+          'error $e',
+          duration: 3,
+          backgroundColor: Colors.red
+      );
+      print('error $e');
     }
   }
 
@@ -111,6 +130,11 @@ class LoginController extends ChangeNotifier{
       goToHomePage();
 
     } catch (e) {
+      Toast.show(
+          'error $e',
+          duration: 3,
+          backgroundColor: Colors.red
+      );
       print('error $e');
     }
   }
@@ -134,15 +158,25 @@ class LoginController extends ChangeNotifier{
           goToHomePage();
           break;
         case TwitterLoginStatus.cancelledByUser:
-          print('error 1 ${authResult.errorMessage}');
+          print('error cancelledByUser ${authResult.errorMessage}');
           break;
         case TwitterLoginStatus.error:
-          print('error 2 ${authResult.errorMessage}');
+          Toast.show(
+              'error ${authResult.errorMessage}',
+              duration: 3,
+              backgroundColor: Colors.red
+          );
+          print('error ${authResult.errorMessage}');
           break;
       }
 
     } catch (e) {
-      print('error $e 3');
+      Toast.show(
+          'error $e',
+          duration: 3,
+          backgroundColor: Colors.red
+      );
+      print('error $e');
     }
   }
 
@@ -153,6 +187,11 @@ class LoginController extends ChangeNotifier{
 
   void goToHomePage(){
     Get.off(()=> const HomePage());
+  }
+
+
+  void goToLoginPhonePage(){
+    Get.to(()=> const LoginPhonePage());
   }
 
 }

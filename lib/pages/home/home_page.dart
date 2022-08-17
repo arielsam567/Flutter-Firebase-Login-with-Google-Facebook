@@ -6,7 +6,6 @@ import 'home_controller.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -20,12 +19,9 @@ class _HomePageState extends State<HomePage> {
       child: Consumer<HomeController>(
           builder: (BuildContext context, HomeController controller, _) {
             return Scaffold(
-              body: Container(
+              backgroundColor: Colors.amber,
+              body: SizedBox(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                decoration: const BoxDecoration(
-                    color: Colors.amber
-                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,

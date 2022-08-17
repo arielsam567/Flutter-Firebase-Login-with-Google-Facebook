@@ -4,7 +4,6 @@ import 'package:login_firebase/config/config.dart';
 import 'package:login_firebase/pages/login/login_page.dart';
 import 'package:login_firebase/services/storage.dart';
 
-
 class HomeController extends ChangeNotifier{
 
   HomeController(){
@@ -22,7 +21,5 @@ class HomeController extends ChangeNotifier{
     Storage.storage!.setBool(Config.logged, false);
     Get.off(()=> const LoginPage());
   }
-
-
 
 }

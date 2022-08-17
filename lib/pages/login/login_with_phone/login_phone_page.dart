@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
-import 'package:toast/toast.dart';
 
 import 'login_phone_controller.dart';
 
@@ -15,11 +13,6 @@ class LoginPhonePage extends StatefulWidget {
 }
 
 class _LoginPhonePageState extends State<LoginPhonePage> {
-
-  @override
-  initState(){
-    ToastContext().init(context);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,39 +33,39 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                   children:  [
 
                     if(controller.confirmCode == false)...[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-                      child: TextField(
-                        controller: controller.phone,
-                        maxLength: 19,
-                        keyboardType: TextInputType.phone,
-                        inputFormatters: [MaskTextInputFormatter(
-                            mask: '+## (##) #####-####',
-                            filter: { "#": RegExp(r'[0-9]') },
-                            type: MaskAutoCompletionType.lazy
-                        )],
-                        decoration: const InputDecoration(
-                          hintText: '+## (##) #####-####',
-                          labelText: 'Phone',
-                        ),
-
-                      ),
-                    ),
-
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
-                          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),),
-                        onPressed: (){
-                          controller.sendCode();
-                        },
-                        child: const Text(
-                          'Confirmar Numero',
-                          style: TextStyle(
-                              color: Colors.white
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+                        child: TextField(
+                          controller: controller.phone,
+                          maxLength: 19,
+                          keyboardType: TextInputType.phone,
+                          inputFormatters: [MaskTextInputFormatter(
+                              mask: '+## (##) #####-####',
+                              filter: { "#": RegExp(r'[0-9]') },
+                              type: MaskAutoCompletionType.lazy
+                          )],
+                          decoration: const InputDecoration(
+                            hintText: '+## (##) #####-####',
+                            labelText: 'Phone',
                           ),
-                        )
-                    ),
+
+                        ),
+                      ),
+
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.black,
+                            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),),
+                          onPressed: (){
+                            controller.sendCode();
+                          },
+                          child: const Text(
+                            'Confirmar Número',
+                            style: TextStyle(
+                                color: Colors.white
+                            ),
+                          )
+                      ),
                     ]else...[
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
@@ -103,7 +96,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                               controller.confirmSmsCode();
                             },
                             child:  Text(
-                              'Confirmar Código de Seguranca enviado para o numero \n${controller.phone.text}',
+                              'Confirmar Código de Segurança enviado para o número \n${controller.phone.text}',
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   color: Colors.white
