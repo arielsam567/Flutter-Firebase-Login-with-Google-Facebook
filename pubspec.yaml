@@ -1,7 +1,7 @@
 name: login_firebase
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -14,14 +14,15 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.0.0
   shared_preferences: ^2.0.7
-  firebase_auth: ^3.6.0
-  firebase_core: ^1.0.1
   get: ^4.6.5
-  google_sign_in: ^5.4.1
-  flutter_login_facebook: ^1.2.0
-  sign_in_with_apple: ^4.1.0
   mask_text_input_formatter: ^2.4.0
   toast: ^0.3.0
+
+  firebase_auth: ^3.6.0
+  firebase_core: ^1.0.1
+  google_sign_in: ^5.4.1
+  flutter_login_facebook: ^1.2.0  #IOS 12 é a versão minima
+  sign_in_with_apple: ^4.1.0
   twitter_login: ^4.1.0-dev
 
 dev_dependencies:

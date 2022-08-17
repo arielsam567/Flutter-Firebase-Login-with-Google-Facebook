@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_firebase/widgets/button.dart';
 import 'package:provider/provider.dart';
-import 'package:toast/toast.dart';
 
 import 'login_controller.dart';
 
@@ -13,12 +12,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  @override
-  initState(){
-    super.initState();
-    ToastContext().init(context);
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +27,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+
                     ButtonLogin(
                       onPressed: () => controller.loginWithGoogle,
                       text:'Login com Google',

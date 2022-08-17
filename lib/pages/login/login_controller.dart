@@ -189,7 +189,6 @@ class LoginController extends ChangeNotifier{
     Get.off(()=> const HomePage());
   }
 
-
   void goToLoginPhonePage(){
     Get.to(()=> const LoginPhonePage());
   }
