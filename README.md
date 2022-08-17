@@ -19,7 +19,7 @@
 ```
 
 ### 2. Para IOS, inserir no info.plist,
-```plist
+```
 <!-- Google Sign-in Section -->
 <key>CFBundleURLTypes</key>
 <array>
@@ -83,7 +83,7 @@ android:exported="true">
 ```
 
 ### 4. Adicionar ao info.plist, inserir dentro do array de CFBundleURLTypes
-```plist
+```
 <key>CFBundleURLTypes</key>
 	<array>
 		[...]
@@ -97,7 +97,7 @@ android:exported="true">
 ```
 
 ### 5. Adicionar ao info.plist
-```plist
+```
     [...]
     <key>FacebookAppID</key>
 	<string>[APP_ID]</string>
@@ -111,3 +111,5 @@ android:exported="true">
 		<string>fb-messenger-share-api</string>
 	</array>
 ```
+
+## Configuração para sign_in_with_apple
