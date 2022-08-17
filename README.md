@@ -54,31 +54,31 @@ VERSAO MINIMA COM flutter_login_facebook: ^1.2.0 É IOS 12
 
 ### 2. Adicionar ao AndroidManifest.xml
 ```xml
-[...]
+    [...]
     <uses-permission android:name="android.permission.INTERNET"/>
     <queries>
     <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
     </queries>
-[...]
+    [...]
 
     <!-- START FACEBOOK CONFIG -->
-<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-<meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
-
-<activity android:name="com.facebook.FacebookActivity"
-android:configChanges=
-    "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-android:label="@string/app_name" />
-<activity
-android:name="com.facebook.CustomTabActivity"
-android:exported="true">
-<intent-filter>
-    <action android:name="android.intent.action.VIEW" />
-    <category android:name="android.intent.category.DEFAULT" />
-    <category android:name="android.intent.category.BROWSABLE" />
-    <data android:scheme="@string/fb_login_protocol_scheme" />
-</intent-filter>
-</activity>
+    <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+    <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+    
+    <activity android:name="com.facebook.FacebookActivity"
+    android:configChanges=
+        "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+    android:label="@string/app_name" />
+    <activity
+    android:name="com.facebook.CustomTabActivity"
+    android:exported="true">
+    <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="@string/fb_login_protocol_scheme" />
+    </intent-filter>
+    </activity>
     <!-- END FACEBOOK CONFIG -->
 ```
 
