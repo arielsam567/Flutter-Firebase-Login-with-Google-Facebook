@@ -14,9 +14,9 @@ class SplashController extends ChangeNotifier{
     bool logged = Storage.storage!.getBool(Config.logged) ?? false;
 
     if(logged){
-      Get.to( ( )=> const HomePage()); // look at this simplicity :)
+      Get.off( ( )=> const HomePage()); // look at this simplicity :)
     }else{
-      Get.to( ( )=> const LoginPage()); // look at this simplicity :)
+      Get.off( ( )=> const LoginPage()); // look at this simplicity :)
     }
   }
 

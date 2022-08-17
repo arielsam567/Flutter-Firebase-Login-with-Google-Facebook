@@ -41,7 +41,10 @@ dependencies:
   get: ^4.6.5
   google_sign_in: ^5.4.1
   flutter_login_facebook: ^1.2.0
-#  sign_in_with_apple: ^2.5.2
+  sign_in_with_apple: ^4.1.0
+  mask_text_input_formatter: ^2.4.0
+  toast: ^0.3.0
+
 
 
 dev_dependencies:

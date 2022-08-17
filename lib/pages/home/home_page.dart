@@ -31,6 +31,9 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Email: ${controller.email}'),
+
+                    const SizedBox(height: 50,),
+
                     ElevatedButton(
                         onPressed: (){
                           controller.logout();

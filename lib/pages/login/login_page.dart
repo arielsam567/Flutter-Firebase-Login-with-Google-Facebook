@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:login_firebase/pages/login/login_with_phone/login_phone_page.dart';
 import 'package:provider/provider.dart';
-
 import 'login_controller.dart';
 
 class LoginPage extends StatefulWidget {
@@ -33,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: Colors.white,
-                            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),),
+                            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),),
                         onPressed: (){
                           controller.loginWithGoogle();
                         },
@@ -45,12 +46,12 @@ class _LoginPageState extends State<LoginPage> {
                         )
                     ),
 
-                    const SizedBox(height: 100,),
+                    const SizedBox(height: 50,),
 
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: Colors.blue,
-                          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),),
+                          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),),
                         onPressed: (){
                           controller.loginWithFacebook();
                         },
@@ -58,6 +59,40 @@ class _LoginPageState extends State<LoginPage> {
                           'Login com Facebook',
                           style: TextStyle(
                               color: Colors.white
+                          ),
+                        )
+                    ),
+
+                    const SizedBox(height: 50,),
+
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.black,
+                          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),),
+                        onPressed: (){
+                          controller.loginWithApple();
+                        },
+                        child: const Text(
+                          'Login com Apple',
+                          style: TextStyle(
+                              color: Colors.white
+                          ),
+                        )
+                    ),
+
+                    const SizedBox(height: 50,),
+
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),),
+                        onPressed: (){
+                          Get.to(() => const LoginPhonePage());
+                        },
+                        child: const Text(
+                          'Login com Telefone',
+                          style: TextStyle(
+                              color: Colors.black
                           ),
                         )
                     ),

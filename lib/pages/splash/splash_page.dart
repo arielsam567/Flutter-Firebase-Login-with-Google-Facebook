@@ -16,7 +16,8 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    controller.init();
+    Future.delayed(const Duration(seconds: 3), controller.init);
+
   }
 
 
@@ -31,6 +32,8 @@ class _SplashPageState extends State<SplashPage> {
               'SPLASH PAGE...\n\nloading user...',
               textAlign: TextAlign.center,
             ),
+            SizedBox(height: 40,),
+            CircularProgressIndicator(color: Colors.black,)
           ],
         ),
       ),

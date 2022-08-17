@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:login_firebase/config/config.dart';
 import 'package:login_firebase/pages/home/home_page.dart';
 import 'package:login_firebase/services/storage.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LoginController extends ChangeNotifier{
 
@@ -74,13 +75,42 @@ class LoginController extends ChangeNotifier{
     }
   }
 
+  Future<void> loginWithApple() async {
+
+    try {
+      final AuthorizationCredentialAppleID _appleCredential =
+      await SignInWithApple.getAppleIDCredential(scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ]);
+
+      final OAuthProvider oAuthProvider = OAuthProvider('apple.com');
+
+      final OAuthCredential _credential = oAuthProvider.credential(
+        idToken: _appleCredential.identityToken,
+        accessToken: _appleCredential.authorizationCode,
+      );
+
+      FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+      final UserCredential userCredential =
+      await _firebaseAuth.signInWithCredential(_credential);
+
+      successToLogin(userCredential.user!.email!);
+      goToHomePage();
+
+    } catch (e) {
+      print('error $e');
+    }
+  }
+
   void successToLogin(String email){
     Storage.storage!.setString(Config.email, email);
     Storage.storage!.setBool(Config.logged, true);
   }
 
   void goToHomePage(){
-    Get.to(()=> const HomePage());
+    Get.off(()=> const HomePage());
   }
 
 }

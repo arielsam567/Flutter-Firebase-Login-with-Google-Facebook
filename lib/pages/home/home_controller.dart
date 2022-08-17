@@ -20,7 +20,7 @@ class HomeController extends ChangeNotifier{
   Future<void> logout() async{
     Storage.storage!.remove(Config.email);
     Storage.storage!.setBool(Config.logged, false);
-    Get.to(()=> const LoginPage());
+    Get.off(()=> const LoginPage());
   }
 
 
