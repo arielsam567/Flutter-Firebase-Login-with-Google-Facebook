@@ -30,13 +30,17 @@ class LoginController extends ChangeNotifier{
   }
 
   Future<void> loginWithFacebook() async {
+    print("1");
     try {
       final fb = FacebookLogin();
-
-      final FacebookLoginResult res = await fb.logIn(permissions: [
-        FacebookPermission.publicProfile,
-        FacebookPermission.email,
-      ]);
+      print("2");
+      final FacebookLoginResult res = await fb.logIn(
+          permissions: [
+            FacebookPermission.publicProfile,
+            FacebookPermission.email,
+          ]
+      );
+      print("3");
 
       switch (res.status) {
         case FacebookLoginStatus.success:
@@ -82,7 +86,10 @@ class LoginController extends ChangeNotifier{
       await SignInWithApple.getAppleIDCredential(scopes: [
         AppleIDAuthorizationScopes.email,
         AppleIDAuthorizationScopes.fullName,
-      ]);
+      ],
+          webAuthenticationOptions: WebAuthenticationOptions(
+              clientId: 'com.ariel.login.com.firebase',
+              redirectUri: Uri.parse('https://flutter-login.glitch.me/callbacks/sign_in_with_apple')));
 
       final OAuthProvider oAuthProvider = OAuthProvider('apple.com');
 

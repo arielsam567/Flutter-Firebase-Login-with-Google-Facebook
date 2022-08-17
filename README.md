@@ -16,3 +16,8 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 VERSAO MINIMA COM flutter_login_facebook: ^1.2.0 É IOS 12
+
+adicionar sha1 e sha256 no firebase p login com google
+cd android
+./gradlew signingReport
+
