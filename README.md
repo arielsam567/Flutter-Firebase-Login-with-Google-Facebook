@@ -11,6 +11,8 @@
 ```
 
 ## Configuração para google_sign_in
+- [google_sign_in](https://pub.dev/packages/google_sign_in)
+- [Firebase Console](https://console.firebase.google.com/)
 
 ### 1. Para android, obter o SHA-1 e SHA-256 para inserir no firebase
 ```
@@ -40,6 +42,9 @@
 Versão mínima com flutter_login_facebook: ^1.2.0 É IOS 12.0
 
 ## Configuração para flutter_login_facebook
+- [flutter_login_facebook](https://pub.dev/packages/flutter_login_facebook)
+- [Facebook Developer](https://developers.facebook.com/)
+
 
 ### 1. Para android, criar o arquivo strings.xml localizado em android/app/src/main/res/values/
 ```xml
@@ -82,7 +87,7 @@ Versão mínima com flutter_login_facebook: ^1.2.0 É IOS 12.0
     <!-- END FACEBOOK CONFIG -->
 ```
 
-### 4. Adicionar ao info.plist, inserir dentro do array de CFBundleURLTypes
+### 3. Adicionar ao info.plist, inserir dentro do array de CFBundleURLTypes
 ```
 <key>CFBundleURLTypes</key>
 	<array>
@@ -96,7 +101,7 @@ Versão mínima com flutter_login_facebook: ^1.2.0 É IOS 12.0
 	</array>
 ```
 
-### 5. Adicionar ao info.plist
+### 4. Adicionar ao info.plist
 ```
     [...]
     <key>FacebookAppID</key>
@@ -113,6 +118,9 @@ Versão mínima com flutter_login_facebook: ^1.2.0 É IOS 12.0
 ```
 
 ## Configuração para sign_in_with_apple
+
+- [sign_in_with_apple](https://pub.dev/packages/sign_in_with_apple)
+- [Apple developer](https://appstoreconnect.apple.com/)
 
 ### 1. Adicionar ao AndroidManifest.xml
 ```xml
@@ -139,6 +147,10 @@ Abrir Xcode -> Targets -> Runner -> Signing & Capabilities -> + Capability -> Se
 Para isso, você já deve ter configurado o seu app na Apple Store Connect 
 
 ## Configuração para twitter_login
+
+- [sign_in_with_apple](https://pub.dev/packages/twitter_login)
+- [Twitter developer](https://developer.twitter.com/)
+
 
 ### 1. Configurando o AndroidManifest.xml
 ```xml
