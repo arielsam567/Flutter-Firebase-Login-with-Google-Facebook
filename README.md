@@ -113,3 +113,67 @@ VERSAO MINIMA COM flutter_login_facebook: ^1.2.0 É IOS 12
 ```
 
 ## Configuração para sign_in_with_apple
+
+### 1. Adicionar ao AndroidManifest.xml
+```xml
+    [...]
+    <activity
+        android:name="com.aboutyou.dart_packages.sign_in_with_apple.SignInWithAppleCallback"
+        android:exported="true"
+    >
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+    
+            <data android:scheme="signinwithapple" />
+            <data android:path="callback" />
+        </intent-filter>
+    </activity>
+```
+
+### 2. Configurando para IOS
+
+Abrir Xcode -> Targets -> Runner -> Signing & Capabilities -> + Capability -> Selecione a opção "Sign in with Apple".
+
+Para isso, você já deve ter configurado o seu app na Apple Store Connect 
+
+## Configuração para twitter_login
+
+### 1. Configurando o AndroidManifest.xml
+```xml
+[...]
+            <!--  START TWITTER CONFIG-->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "example://gizmos” -->
+                <!-- Registered Callback URLs in TwitterApp -->
+                <data
+                    android:host="[HOST]"
+                    android:scheme="[HOST]" /> <!-- host is option -->
+            </intent-filter>
+            <!--  END TWITTER CONFIG-->
+[...]
+```
+
+### 2. Adicionar ao info.plist, inserir dentro do array de CFBundleURLTypes
+```
+<key>CFBundleURLTypes</key>
+	<array>
+		[...]
+		<dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>[APP_NAME]</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+              <!-- Registered Callback URLs in TwitterApp -->
+              <string>[HOST]</string>
+            </array>
+        </dict>
+	</array>
+```
