@@ -37,7 +37,7 @@
 <!-- End of the Google Sign-in Section -->
 ```
 
-VERSAO MINIMA COM flutter_login_facebook: ^1.2.0 É IOS 12
+Versão mínima com flutter_login_facebook: ^1.2.0 É IOS 12.0
 
 ## Configuração para flutter_login_facebook
 
